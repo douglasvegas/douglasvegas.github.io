@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>screenShot</title>
+<style>
+  #generaterImg {
+    border:none;
+    outline:none;
+    background-color: red;
+    color: white;
+  }
+</style>
+</head>
+<body>
+<input type="button" name="" value="点击生成" id="generaterImg"><br /><br />
+<div id='wrap'>
+  <div id = 'yuanliang' contenteditable="true" style='background:green;font-size:18px;
+  width:300px;height:200px;line-height:200px;position: relative;
+  color:white;text-align:center;margin-bottom:20px;'>
+  <strong>当然选择原谅她啦</strong>
+  <input type='text' value='123' id="inputChange" />
+  </div>
+</div>
+
+<canvas id="cvs"></canvas>
+
+
+</body>
+<script type="text/javascript">
+document.getElementById("inputChange").onkeyup = function (e) {
+	document.getElementById("inputChange").setAttribute('value',e.target.value); 
+}
+document.getElementById("generaterImg").onclick = function () {
+	var divContent = document.getElementById("wrap").innerHTML;
+	var reg = /<input(.*?)>/
+	var a = divContent.match(reg)[0].replace(/\>/,'/>')
+	divContent = divContent.replace(reg,a)
+	var img = new Image();
+	img.src = getDiv2Image(divContent);
+	img.id = 'svgImg'
+	img.onload = function () {
+			var canvas = document.getElementById("cvs")
+			var _image = new Image()
+			var W = 300;
+			var H = 200;
+			canvas.width = W;
+			canvas.height = H;
+			var ctx = canvas.getContext('2d');
+			var oImg = document.getElementById('svgImg')
+			ctx.drawImage(img, 0,0, W,H);
+			var res = canvas.toDataURL('image/png');
+			console.log(res)
+	}
+}
+
+function getDiv2Image(divContent) {
+	var data = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'>"+
+				"<foreignObject width='100%' height='100%'>"+
+				"<div xmlns='http://www.w3.org/1999/xhtml' >"
+				+divContent+
+				"</div></foreignObject></svg>";
+	return data;
+}
+</script>
+</html>
