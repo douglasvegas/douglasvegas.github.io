@@ -4,6 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const argv = require('yargs').argv
 
 const modelName = argv.env.M
+console.log('==modelName==')
+console.log(argv.env)
+console.log(modelName)
+console.log('==modelName==')
 const contextUrl = path.resolve(__dirname, modelName)
 module.exports = {
   devtool: 'source-map',

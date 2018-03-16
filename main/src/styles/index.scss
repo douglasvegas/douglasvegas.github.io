@@ -1,5 +1,31 @@
 .test {
-    color:red;
-    font-size: 18px;
+    color:rgb(50, 73, 50);
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.hasCursor::after {
+    content: '';
+    display: inline-block;
+    height: 24px;
+    width: 8px;
+    vertical-align: bottom;
+    background-color: currentColor;
+    animation: cursor 1s infinite;
+}
+
+@keyframes cursor {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    51% {
+        opacity: 0;
+    }
+    to {
+        opacity: 0;
+    }
 }
